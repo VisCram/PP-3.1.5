@@ -1,11 +1,21 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
-    <title>Spring Security Example</title>
+    <title>Login Box</title>
+    <style>
+        .login-box {
+            border: 1px solid black;
+            width: 200px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome to Index PAGE!</h1>
-
-
+<div class="login-box">
+    <a href="/login" th:align="center">Login, please</a>
+</div>
 </body>
 </html>
