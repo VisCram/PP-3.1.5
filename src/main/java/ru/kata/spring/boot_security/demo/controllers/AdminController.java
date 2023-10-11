@@ -18,7 +18,7 @@ public class AdminController {
     private final RoleService roleService;
 
     @Autowired
-    public AdminController (UserService userService, RoleService roleService) {
+    public AdminController(UserService userService, RoleService roleService) {
         this.roleService = roleService;
         this.userService = userService;
     }
@@ -34,6 +34,7 @@ public class AdminController {
         model.addAttribute("user", userService.findByUsername(principal.getName()));
         return "showUser";
     }
+
     @GetMapping("/new")
     public String newUser(Model model) {
         model.addAttribute("user", new User());
@@ -57,7 +58,7 @@ public class AdminController {
 
     @PatchMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         BindingResult bindingResult, @PathVariable ("id") long id) {
+                         BindingResult bindingResult, @PathVariable("id") long id) {
         if (bindingResult.hasErrors())
             return "/edit";
 

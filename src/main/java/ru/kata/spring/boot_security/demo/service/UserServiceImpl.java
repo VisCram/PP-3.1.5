@@ -12,10 +12,9 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
-
-
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder;
@@ -30,7 +29,7 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
-        if(user == null)
+        if (user == null)
             throw new UsernameNotFoundException("User not found");
         return user;
     }
@@ -43,6 +42,7 @@ public class UserServiceImpl implements UserService {
     public User findByUsername(String name) {
         return userRepository.findByUsername(name);
     }
+
     @Override
     public User showUser(Long id) {
         User user = userRepository.findById(id).get();
