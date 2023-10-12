@@ -36,7 +36,7 @@ public class AdminController {
     }
 
     @GetMapping("/new")
-    public String newUser(Model model) {
+    public String showNewUserForm(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRoles());
         return "/new";
@@ -50,7 +50,7 @@ public class AdminController {
     }
 
     @GetMapping("/{id}/edit")
-    public String editUser(Model model, @PathVariable("id") long id) {
+    public String showEditUserForm(Model model, @PathVariable("id") long id) {
         model.addAttribute("user", userService.showUser(id));
         model.addAttribute("userRoles", roleService.getAllRoles());
         return "/edit";
@@ -61,7 +61,6 @@ public class AdminController {
                          BindingResult bindingResult, @PathVariable("id") long id) {
         if (bindingResult.hasErrors())
             return "/edit";
-
         userService.updateUser(id, user);
         return "redirect:/admin/";
     }
