@@ -15,6 +15,13 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "firstname")
+    private String firstName;
+    @Column(name = "lastname")
+    private String lastName;
+    @Column(name = "age")
+    private int age;
+
     @Column(name = "username", unique = true)
     private String username;
 
@@ -32,11 +39,38 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String username, String email, String password, List<Role> roles) {
+    public User(String firstname, String lastName, int age, String username, String email, String password, List<Role> roles) {
+        this.firstName = firstname;
+        this.lastName = lastName;
+        this.age = age;
         this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstname) {
+        this.firstName = firstname;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastname) {
+        this.lastName = lastname;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public List<Role> getRoles() {
@@ -82,14 +116,16 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + id +
-                ", Username='" + username + '\'' +
-                ", Email=" + email +
-                ", Password='" + password + '\'' +
-                ", Role='" + roles + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", roles=" + roles +
                 '}';
     }
-
 
     @Override
     public boolean isAccountNonExpired() {

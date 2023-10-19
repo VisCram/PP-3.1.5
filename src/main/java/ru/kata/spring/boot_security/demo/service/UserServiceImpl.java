@@ -16,7 +16,6 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
-
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -45,8 +44,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User showUser(Long id) {
-        User user = userRepository.findById(id).get();
-        return user;
+        return userRepository.findById(id).get();
     }
 
     @Override
