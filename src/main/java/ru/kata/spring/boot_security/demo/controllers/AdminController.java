@@ -34,13 +34,14 @@ public class AdminController {
         model.addAttribute("allRole", roleService.getAllRoles());
         return "admin";
     }
+
     @GetMapping("/new")
     public String showNewUserForm(Model model, Principal principal) {
         User userAuth = userRepository.findByUsername(principal.getName());
         model.addAttribute("users", userAuth);
         User user = new User();
-        model.addAttribute("user",user);
-        model.addAttribute("allRole",roleService.getAllRoles());
+        model.addAttribute("user", user);
+        model.addAttribute("allRole", roleService.getAllRoles());
         return "user_info";
     }
 
@@ -49,14 +50,16 @@ public class AdminController {
         userService.saveUser(user);
         return "redirect:/admin/";
     }
+
     @PutMapping("/updateInfo/{id}")
     public String updateUser(@ModelAttribute("user") User user) {
         System.out.println(user.toString());
         userService.saveUser(user);
         return "redirect:/admin/";
     }
-    @DeleteMapping ("/deleteInfo")
-    public String deleteUser(@RequestParam(value= "id") Long id) {
+
+    @DeleteMapping("/deleteInfo")
+    public String deleteUser(@RequestParam(value = "id") Long id) {
         userService.deleteUserById(id);
         return "redirect:/admin/";
     }

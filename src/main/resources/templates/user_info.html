@@ -29,7 +29,9 @@
             <div class="col-2 p-0">
                 <div class="nav flex-column nav-pills pt-4" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" aria-controls="v-pills-home" aria-selected="true">Admin</a>
-                    <a class="nav-item nav-link" th:href="@{/user}">User</a>
+                    <a class="nav-link" href="/user/"
+                       role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false">User</a>
                 </div>
             </div>
             <div class="col-10 px-0">
@@ -66,7 +68,8 @@
                                 <input th:name="email" th:type="text" class="form-control" id="email" required/>
                                 <br>
                                 <label for="password"><b>Password</b></label>
-                                <input th:name="password" th:type="password" class="form-control" id="password" required/>
+                                <input th:name="password" th:type="password" class="form-control" id="password"
+                                       required/>
                                 <br>
                                 <label for="roles"><b>Role</b></label>
                                 <select class="form-control" id="roles"
