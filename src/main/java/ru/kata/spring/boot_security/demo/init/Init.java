@@ -31,11 +31,11 @@ public class Init {
             Role role1 = new Role("ROLE_ADMIN");
             roleRepository.save(role1);
 
-            User user = new User("user", "user", 20, "user", "user@mail.ru",
+            User user = new User("user", "user", 20, "user@mail.ru",
                     "user", List.of(role));
             userService.saveUser(user);
 
-            User user1 = new User("admin", "admin", 20, "admin", "admin@mail.ru",
+            User user1 = new User("admin", "admin", 20, "admin@mail.ru",
                     "admin", List.of(role, role1));
             userService.saveUser(user1);
         }

@@ -27,7 +27,7 @@ allUsers.then(users => {
             result += `<tr>
                     <td>${users[i].id}</td>
                     <td>${users[i].username}</td>
-                    <td>${users[i].lastname}</td>
+                    <td>${users[i].lastName}</td>
                     <td>${users[i].age}</td>
                     <td>${users[i].email}</td>
                     <td>${roles}</td>
@@ -75,8 +75,8 @@ document.getElementById('newUserForm').addEventListener('submit', (e) => {
             'Content-Type': 'application/json;charset=utf-8'
         },
         body: JSON.stringify({
-            username: document.getElementById('firstName').value,
-            lastname: document.getElementById('lastName').value,
+            username: document.getElementById('username').value,
+            lastName: document.getElementById('lastName').value,
             age: document.getElementById('age').value,
             email: document.getElementById('email').value,
             password: document.getElementById('password').value,
@@ -89,7 +89,7 @@ document.getElementById('newUserForm').addEventListener('submit', (e) => {
             newRow.innerHTML = `<tr>
                            <td>${user.id}</td>
                            <td>${user.username}</td>
-                           <td>${user.lastname}</td>
+                           <td>${user.lastName}</td>
                            <td>${user.age}</td>
                            <td>${user.email}</td>
                            <td>${rolesAddUserValue}</td>
@@ -105,7 +105,7 @@ document.getElementById('newUserForm').addEventListener('submit', (e) => {
 
 // Изменение пользователя
 const idEdit = document.getElementById('id_edit')
-const firstNameEdit = document.getElementById('firstName_edit')
+const firstNameEdit = document.getElementById('username_edit')
 const lastNameEdit = document.getElementById('lastName_edit')
 const ageEdit = document.getElementById('age_edit')
 const emailEdit = document.getElementById('email_edit')
@@ -153,7 +153,7 @@ document.getElementById('edit_user_form').addEventListener('submit', (e) => {
         body: JSON.stringify({
             id: idEdit.value,
             username: firstNameEdit.value,
-            lastname: lastNameEdit.value,
+            lastName: lastNameEdit.value,
             age: ageEdit.value,
             email: emailEdit.value,
             password: passwordEdit.value,
@@ -176,7 +176,7 @@ let rowDelete = null
 on(document, 'click', '#deleteUserBtn', e => {
     rowDelete = e.parentNode.parentNode
     document.getElementById('id_delete').value = rowDelete.children[0].innerHTML
-    document.getElementById('firstName_delete').value = rowDelete.children[1].innerHTML
+    document.getElementById('username_delete').value = rowDelete.children[1].innerHTML
     document.getElementById('lastName_delete').value = rowDelete.children[2].innerHTML
     document.getElementById('age_delete').value = rowDelete.children[3].innerHTML
     document.getElementById('email_delete').value = rowDelete.children[4].innerHTML

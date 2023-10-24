@@ -14,23 +14,16 @@ public class User implements UserDetails {
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "firstname")
-    private String firstName;
+    @Column(name = "firstname", unique = true)
+    private String username;
     @Column(name = "lastname")
     private String lastName;
     @Column(name = "age")
     private int age;
-
-    @Column(name = "username", unique = true)
-    private String username;
-
     @Column(name = "email")
     private String email;
-
     @Column(name = "password")
     private String password;
-
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
@@ -39,23 +32,15 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String firstname, String lastName, int age, String username, String email, String password, List<Role> roles) {
-        this.firstName = firstname;
+    public User(String username, String lastName, int age, String email, String password, List<Role> roles) {
+        this.username = username;
         this.lastName = lastName;
         this.age = age;
-        this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstname) {
-        this.firstName = firstname;
-    }
 
     public String getLastName() {
         return lastName;
@@ -117,10 +102,9 @@ public class User implements UserDetails {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
+                ", username='" + username + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age +
-                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +

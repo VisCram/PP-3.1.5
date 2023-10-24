@@ -24,7 +24,7 @@ currentUser.then(user => {
         result += `<tr>
                     <td>${user.id}</td>
                     <td>${user.username}</td>
-                    <td>${user.lastname}</td>
+                    <td>${user.lastName}</td>
                     <td>${user.age}</td>
                     <td>${user.email}</td>
                     <td>${roles}</td>
