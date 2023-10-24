@@ -12,6 +12,7 @@ import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -33,37 +34,51 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
-    public List<User> getAllUsers() {
+    @Override
+    @Transactional
+    public void addUser(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+
+    }
+
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        userRepository.save(user);
+
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(Long id) {
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public List<User> allUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User findByUsername(String name) {
-        return userRepository.findByUsername(name);
-    }
+    @Transactional
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
 
-    @Override
-    public User showUser(Long id) {
-        return userRepository.findById(id).get();
     }
 
     @Override
     @Transactional
-    public void updateUser(long id, User user) {
-        User user_from_DB = userRepository.findById(id).get();
-        user_from_DB.setUsername(user.getUsername());
-        user_from_DB.setRoles((List<Role>) user.getAuthorities());
-        if (!user.getPassword().equals(showUser(user.getId()).getPassword())) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        userRepository.save(user);
-    }
-
-    @Transactional
-    @Override
-    public void deleteUserById(Long id) {
-        if (userRepository.findById(id).isPresent())
-            userRepository.deleteById(id);
+    public User findUserById(long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("User не найден с id: " + id));
     }
 
     @Transactional

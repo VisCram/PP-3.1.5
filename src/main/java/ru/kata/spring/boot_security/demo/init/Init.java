@@ -25,18 +25,20 @@ public class Init {
 
     @PostConstruct
     public void init() {
-        Role role = new Role("ROLE_USER");
-        roleRepository.save(role);
-        Role role1 = new Role("ROLE_ADMIN");
-        roleRepository.save(role1);
+        if (roleRepository.count() == 0) {
+            Role role = new Role("ROLE_USER");
+            roleRepository.save(role);
+            Role role1 = new Role("ROLE_ADMIN");
+            roleRepository.save(role1);
 
-        User user = new User("user", "user", 20, "user", "user@mail.ru",
-                "user", List.of(role));
-        userService.saveUser(user);
+            User user = new User("user", "user", 20, "user", "user@mail.ru",
+                    "user", List.of(role));
+            userService.saveUser(user);
 
-        User user1 = new User("admin", "admin", 20, "admin", "admin@mail.ru",
-                "admin", List.of(role, role1));
-        userService.saveUser(user1);
+            User user1 = new User("admin", "admin", 20, "admin", "admin@mail.ru",
+                    "admin", List.of(role, role1));
+            userService.saveUser(user1);
+        }
     }
 
 }
